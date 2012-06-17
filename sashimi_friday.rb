@@ -196,7 +196,32 @@ module SashimiFriday
   def find_index
   end
 
-  def first
+  def first(*n)
+    if(n.empty?)
+      index = 1
+    else
+      begin
+        index = Integer(n.first)
+      rescue
+        raise TypeError
+      end
+      return [] if index.zero?
+      raise ArgumentError if index < 0
+    end
+
+    result = []
+    begin
+      each do |*item|
+        result << (item.size == 1 ? item.first : item)
+        break if (index -= 1).zero?
+      end
+    rescue
+      return []
+    end
+    
+    return nil if result.empty? && n.empty?
+    return result.first if result.size == 1 && n.empty?
+    return result
   end
 
   def flat_map
