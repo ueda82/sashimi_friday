@@ -313,10 +313,11 @@ module SashimiFriday
   def take_while
   end
 
-  def to_a
+  def to_a(*args)
+    each(*args){|item|}
   end
 
-  def zip
+  def zip(*args)
   end
 
   private
