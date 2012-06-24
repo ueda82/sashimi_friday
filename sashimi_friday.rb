@@ -310,7 +310,14 @@ module SashimiFriday
   def sort_by
   end
 
-  def take_while
+  def take_while(*args, &block)
+    return enum_for(__method__, *args) unless block
+    results = []
+    each() do |item| 
+        break unless(block.call(*item)) 
+        results << item 
+    end 
+    return results 
   end
 
   def to_a(*args)
