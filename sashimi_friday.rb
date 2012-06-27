@@ -212,7 +212,8 @@ module SashimiFriday
     result = []
     begin
       each do |*item|
-        result << (item.size == 1 ? item.first : item)
+        # result << (item.size == 1 ? item.first : item)
+        result << pick(item) 
         break if (index -= 1).zero?
       end
     rescue
