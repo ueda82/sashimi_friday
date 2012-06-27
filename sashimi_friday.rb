@@ -212,7 +212,6 @@ module SashimiFriday
     result = []
     begin
       each do |*item|
-        # result << (item.size == 1 ? item.first : item)
         result << pick(item) 
         break if (index -= 1).zero?
       end
@@ -301,8 +300,7 @@ module SashimiFriday
 
   def reverse_each(*args, &block)
     return enum_for(__method__, *args) unless block
-    test = to_a.reverse
-    test.each() do |item| 
+    to_a.reverse.each() do |item| 
       block.call(item) 
     end 
   end
