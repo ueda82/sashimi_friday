@@ -278,7 +278,8 @@ module SashimiFriday
   def max_by
   end
 
-  def member?
+  def member?(args, &block)
+    include?(args, &block)
   end
 
   def min
