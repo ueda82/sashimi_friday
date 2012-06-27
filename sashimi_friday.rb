@@ -240,7 +240,11 @@ module SashimiFriday
   def group_by
   end
 
-  def include?
+  def include?(args, &block)
+    each() do |*item| 
+      return true if pick(item) == args
+    end 
+    return false
   end
 
   def inject
