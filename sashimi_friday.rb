@@ -298,7 +298,12 @@ module SashimiFriday
   def reject
   end
 
-  def reverse_each
+  def reverse_each(*args, &block)
+    return enum_for(__method__, *args) unless block
+    test = to_a.reverse
+    test.each() do |item| 
+      block.call(item) 
+    end 
   end
 
   def slice_before
@@ -321,7 +326,14 @@ module SashimiFriday
   end
 
   def to_a(*args)
-    each(*args){|item|}
+    #下記だとテストは徹がreverse_eachの最後のテストでおかしくなる 
+    #  each(*args){|*item|}
+    #  pick　超便利だった
+    results = []
+    each(*args) do |*item| 
+        results << pick(item)
+    end 
+    results 
   end
 
   def zip(*args)
