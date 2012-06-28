@@ -136,7 +136,18 @@ module SashimiFriday
     return results
   end
 
-  def drop_while
+  def drop_while(*args, &block)
+    return enum_for(__method__, *args) unless block
+    results = []
+    flg = true 
+    each(*args) do |*item|
+      item = pick(item)
+      if flg
+        flg = false unless block.call(item)
+      end
+      results << item unless flg
+    end
+    results
   end
 
   def each_cons
